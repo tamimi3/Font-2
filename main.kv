@@ -1,0 +1,48 @@
+# main.kv
+<MainWidget>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '40dp'
+        Button:
+            text: 'اختر الخط العربي'
+            on_release: root.choose_arabic_font()
+        Label:
+            id: arabic_label
+            text: 'لم يتم الاختيار'
+            size_hint_x: 0.7
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: '40dp'
+        Button:
+            text: 'اختر الخط الإنجليزي'
+            on_release: root.choose_english_font()
+        Label:
+            id: english_label
+            text: 'لم يتم الاختيار'
+            size_hint_x: 0.7
+
+    Button:
+        text: 'دمج الخطوط'
+        size_hint_y: None
+        height: '50dp'
+        on_release: root.merge_fonts()
+
+    Label:
+        id: status_label
+        text: ''
+        color: 0, 0.5, 0, 1
+        size_hint_y: None
+        height: '30dp'
+
+    TextInput:
+        id: log_text
+        text: ''
+        readonly: True
+        size_hint_y: 0.5
