@@ -1,19 +1,16 @@
 [app]
-title = MyApp
-package.name = myapp
-package.domain = org.myapp
-# تضمين امتدادات الملفات الضرورية
-source.include_exts = py,kv,ttf,json
-
-# الحزم المطلوبة (تأكد من وجود fonttools)
+title = تطبيق دمج الخطوط
+package.name = font_merger
+package.domain = org.example
+source.dir = .
+version = 0.1
 requirements = python3,kivy,fonttools
-
-# ضبط واجهة التطبيق واتجاهه
-orientation = portrait
-
-# إعدادات Android API
 android.api = 31
 android.minapi = 21
+android.archs = armeabi-v7a, arm64-v8a
+android.permissions = INTERNET
+orientation = portrait
+fullscreen = 0
 
-# أذونات Android
-android.permissions = android.permission.INTERNET
+[buildozer]
+log_level = 2
