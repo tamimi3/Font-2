@@ -1,48 +1,55 @@
-# main.kv
-<MainWidget>:
-    orientation: 'vertical'
-    padding: 10
-    spacing: 10
-
+<FontMergerApp>:
     BoxLayout:
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: '40dp'
-        Button:
-            text: 'اختر الخط العربي'
-            on_release: root.choose_arabic_font()
+        orientation: 'vertical'
+        padding: 20
+        spacing: 20
+
         Label:
-            id: arabic_label
-            text: 'لم يتم الاختيار'
-            size_hint_x: 0.7
+            text: 'تطبيق دمج الخطوط'
+            font_size: '24sp'
+            size_hint_y: None
+            height: self.texture_size[1] + 20
 
-    BoxLayout:
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: '40dp'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '48dp'
+            spacing: 10
+
+            Button:
+                text: 'اختر الخط 1'
+                on_press: app.open_font1()
+            Label:
+                text: app.font1_path or 'لم يتم اختيار أي خط'
+                text_size: self.width, None
+                halign: 'right'
+                valign: 'middle'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '48dp'
+            spacing: 10
+
+            Button:
+                text: 'اختر الخط 2'
+                on_press: app.open_font2()
+            Label:
+                text: app.font2_path or 'لم يتم اختيار أي خط'
+                text_size: self.width, None
+                halign: 'right'
+                valign: 'middle'
+
         Button:
-            text: 'اختر الخط الإنجليزي'
-            on_release: root.choose_english_font()
+            text: 'دمج الخطوط'
+            size_hint_y: None
+            height: '48dp'
+            on_press: app.merge_fonts()
+
         Label:
-            id: english_label
-            text: 'لم يتم الاختيار'
-            size_hint_x: 0.7
-
-    Button:
-        text: 'دمج الخطوط'
-        size_hint_y: None
-        height: '50dp'
-        on_release: root.merge_fonts()
-
-    Label:
-        id: status_label
-        text: ''
-        color: 0, 0.5, 0, 1
-        size_hint_y: None
-        height: '30dp'
-
-    TextInput:
-        id: log_text
-        text: ''
-        readonly: True
-        size_hint_y: 0.5
+            id: status_label
+            text: ''
+            color: 0, 0.5, 0, 1
+            text_size: self.width, None
+            halign: 'center'
+            valign: 'middle'
