@@ -6,9 +6,7 @@ from kivy.uix.filechooser import FileChooserListView
 from kivy.properties import StringProperty
 import os
 
-# نافذة التخطيط الرئيسي ستُحمّل من main.kv
 class FontMergerApp(App):
-    # خصائص لحفظ مسارات الخطين المختارين
     font1_path = StringProperty('')
     font2_path = StringProperty('')
 
@@ -16,10 +14,8 @@ class FontMergerApp(App):
         return Builder.load_file('main.kv')
 
     def open_font1(self):
-        """فتح مربع اختيار ملف للخط الأول."""
         chooser = FileChooserListView(filters=['*.ttf'])
         popup = Popup(title='اختر الخط 1', content=chooser, size_hint=(0.9, 0.9))
-        # عند التأكيد يتم تعيين المسار المحدد
         def select(instance, selection, touch):
             if selection:
                 self.font1_path = selection[0]
@@ -28,7 +24,6 @@ class FontMergerApp(App):
         popup.open()
 
     def open_font2(self):
-        """فتح مربع اختيار ملف للخط الثاني."""
         chooser = FileChooserListView(filters=['*.ttf'])
         popup = Popup(title='اختر الخط 2', content=chooser, size_hint=(0.9, 0.9))
         def select(instance, selection, touch):
@@ -39,18 +34,14 @@ class FontMergerApp(App):
         popup.open()
 
     def merge_fonts(self):
-        """دمج الخطوط باستخدام FontTools وحفظ النتيجة."""
         status_label = self.root.ids.status_label
         if not self.font1_path or not self.font2_path:
             status_label.text = 'الرجاء اختيار كلا الخطين'
             return
         try:
-            # استيراد مكتبة الدمج من FontTools
             from fontTools.merge import Merger
             merger = Merger()
             merged_font = merger.merge([self.font1_path, self.font2_path])
-
-            # تحديد مسار الحفظ: نستخدم القرص الخارجي إذا كان التطبيق على Android
             try:
                 from kivy.utils import platform as kivy_platform
                 if kivy_platform == 'android':
@@ -60,7 +51,6 @@ class FontMergerApp(App):
                     save_dir = os.getcwd()
             except ImportError:
                 save_dir = os.getcwd()
-
             output_path = os.path.join(save_dir, 'merged_font.ttf')
             merged_font.save(output_path)
             status_label.text = f'تم حفظ الملف: {output_path}'
