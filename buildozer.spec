@@ -1,33 +1,46 @@
-[app]
-title = تطبيق دمج الخطوط
-package.name = font_merger
-package.domain = org.example
-source.dir = .
-version = 0.1
+<FontMergerApp>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 20
 
-# متطلبات الحزمة الأساسية، نضيف fonttools للدمج
-requirements = python3,kivy,fonttools
+        Label:
+            text: 'تطبيق دمج الخطوط'
+            font_size: '24sp'
+            size_hint_y: None
+            height: self.texture_size[1] + 20
 
-# إعدادات منصة Android
-android.api = 31
-android.minapi = 21
-android.archs = armeabi-v7a, arm64-v8a
-android.permissions = INTERNET
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '48dp'
+            spacing: 10
 
-# إمكانية دعم التخزين الخارجي إذا لزم
-#android.permissions = WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
+            Button:
+                text: 'اختر الخط 1'
+                on_press: app.open_font1()
+            Label:
+                text: app.font1_path or 'لم يتم اختيار أي خط'
 
-# مسارات الملفات (اختياري إذا كانت الملفات في مسار آخر)
-# source.include_exts = py,png,jpg,kv,atlas
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: '48dp'
+            spacing: 10
 
-# اتجاه التطبيق
-orientation = portrait
-fullscreen = 0
-presplash.filename = %(source.dir)s/data/presplash.png
+            Button:
+                text: 'اختر الخط 2'
+                on_press: app.open_font2()
+            Label:
+                text: app.font2_path or 'لم يتم اختيار أي خط'
 
-# نسخة لغة Python, يمكن ترك الافتراضي (3.9+)
-#android.python_version = 3
+        Button:
+            text: 'دمج الخطوط'
+            size_hint_y: None
+            height: '48dp'
+            on_press: app.merge_fonts()
 
-[buildozer]
-log_level = 2
-warn_on_root = 1
+        Label:
+            id: status_label
+            text: ''
+            color: 0, 0.5, 0, 1
