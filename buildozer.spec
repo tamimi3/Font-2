@@ -1,46 +1,19 @@
-<FontMergerApp>:
-    BoxLayout:
-        orientation: 'vertical'
-        padding: 20
-        spacing: 20
+[app]
+title = MyApp
+package.name = myapp
+package.domain = org.myapp
+# تضمين امتدادات الملفات الضرورية
+source.include_exts = py,kv,ttf,json
 
-        Label:
-            text: 'تطبيق دمج الخطوط'
-            font_size: '24sp'
-            size_hint_y: None
-            height: self.texture_size[1] + 20
+# الحزم المطلوبة (تأكد من وجود fonttools)
+requirements = python3,kivy,fonttools
 
-        BoxLayout:
-            orientation: 'horizontal'
-            size_hint_y: None
-            height: '48dp'
-            spacing: 10
+# ضبط واجهة التطبيق واتجاهه
+orientation = portrait
 
-            Button:
-                text: 'اختر الخط 1'
-                on_press: app.open_font1()
-            Label:
-                text: app.font1_path or 'لم يتم اختيار أي خط'
+# إعدادات Android API
+android.api = 31
+android.minapi = 21
 
-        BoxLayout:
-            orientation: 'horizontal'
-            size_hint_y: None
-            height: '48dp'
-            spacing: 10
-
-            Button:
-                text: 'اختر الخط 2'
-                on_press: app.open_font2()
-            Label:
-                text: app.font2_path or 'لم يتم اختيار أي خط'
-
-        Button:
-            text: 'دمج الخطوط'
-            size_hint_y: None
-            height: '48dp'
-            on_press: app.merge_fonts()
-
-        Label:
-            id: status_label
-            text: ''
-            color: 0, 0.5, 0, 1
+# أذونات Android
+android.permissions = android.permission.INTERNET
